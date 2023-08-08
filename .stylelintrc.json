@@ -1,0 +1,19 @@
+{
+  "ignoreFiles": ["**/*"],
+  "overrides": [
+    {
+      "files": ["**/*.css"],
+      "extends": ["stylelint-config-standard"],
+      "rules": {}
+    },
+    {
+      "files": ["**/*.scss"],
+      "extends": ["stylelint-config-standard-scss"],
+      "rules": {
+        "scss/at-import-partial-extension": "always",
+        "scss/at-import-partial-extension-whitelist": ["scss"],
+        "no-descending-specificity": null
+      }
+    }
+  ]
+}
