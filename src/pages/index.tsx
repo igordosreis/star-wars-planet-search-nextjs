@@ -1,6 +1,8 @@
 import Head from 'next/head';
 
 import ComponentBoilerplate from '@/components/component-boilerplate';
+import TestInput from '@/components/TestInput';
+import TestOutput from '@/components/TestOutput';
 
 export default function Home() {
   return (
@@ -12,6 +14,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ComponentBoilerplate />
+      <TestInput />
+      <TestOutput />
     </>
   );
 }
