@@ -104,7 +104,7 @@ export default function FilterForm() {
   const handleRemoveAllFiltersButtonClick = () => setNumericFilterArguments([]);
 
   const handleSortSelectAndRadio = (
-    event: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<> | React.ChangeEvent<HTMLInputElement>
   ) =>
     setOrder({
       ...order,
