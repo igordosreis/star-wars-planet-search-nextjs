@@ -70,7 +70,7 @@ export default function FilterForm() {
   ) => {
     const updatedFilterArguments = numericFilterArguments.filter(
       ({ column }: FilterArguments) =>
-        column !== event.currentTarget.getAttribute('dataset-filter')
+        column !== event.currentTarget.getAttribute('data-filter')
     );
     setNumericFilterArguments(updatedFilterArguments);
   };
