@@ -1,8 +1,8 @@
 import Head from 'next/head';
 
 import ComponentBoilerplate from '@/components/component-boilerplate';
-import TestInput from '@/components/TestInput';
-import TestOutput from '@/components/TestOutput';
+import Table from '@/components/Table';
+import FilterForm from '@/components/FilterForm';
 
 export default function Home() {
   return (
@@ -14,8 +14,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ComponentBoilerplate />
-      <TestInput />
-      <TestOutput />
+      <Table />
+      <FilterForm />
     </>
   );
 }
