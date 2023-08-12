@@ -5,12 +5,11 @@ import { capitalizeAndAddSpace } from '@/helpers';
 
 import SelectWithOptions from './SelectWithOptions';
 
-// type Target = {
-//   target: {
-//     name: string;
-//     value: string;
-//   };
-// };
+interface FilterArguments {
+  column: string;
+  comparison?: string;
+  value?: number;
+}
 
 const COLUMN_OPTIONS = [
   'population',
@@ -49,12 +48,6 @@ export default function FilterForm() {
   // Handling Functions
   const handleNameFilterInput = (event: React.ChangeEvent<HTMLInputElement>) =>
     setFilterByName(event.target.value);
-  // const handleNameFilterInput = ({
-  //   target: { value },
-  // }: {
-  //   target: EventTargetWithValue;
-  //   value: string;
-  // }) => setFilterByName(value);
 
   const handleNumericFilterSelect = (
     event: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>
@@ -63,13 +56,6 @@ export default function FilterForm() {
       ...filterByNumericValues,
       [event.target.name]: event.target.value,
     });
-  // const handleNumericFilterSelect = ({
-  //   target: { name, value },
-  // }: Target) =>
-  //   setFilterByNumericValues({
-  //     ...filterByNumericValues,
-  //     [name]: value,
-  //   });
 
   const handleAddFilterButtonClick = () => {
     const updatedFilterArguments = [
@@ -83,24 +69,11 @@ export default function FilterForm() {
     event: React.MouseEvent<HTMLElement, MouseEvent>
   ) => {
     const updatedFilterArguments = numericFilterArguments.filter(
-      ({ column }: { column: string }) =>
+      ({ column }: FilterArguments) =>
         column !== event.currentTarget.getAttribute('dataset-filter')
     );
     setNumericFilterArguments(updatedFilterArguments);
   };
-  // const handleRemoveFilterButtonClick = ({
-  //   target: {
-  //     dataset: { filter },
-  //   },
-  // }: {
-  //   target: EventTargetWithValue;
-  //   filter: string;
-  // }) => {
-  //   const updatedFilterArguments = numericFilterArguments.filter(
-  //     ({ column }: { column: string }) => column !== filter
-  //   );
-  //   setNumericFilterArguments(updatedFilterArguments);
-  // };
 
   const handleRemoveAllFiltersButtonClick = () => setNumericFilterArguments([]);
 
@@ -111,23 +84,13 @@ export default function FilterForm() {
       ...order,
       [event.target.name]: event.target.value,
     });
-  // const handleSortSelectAndRadio = ({
-  //   target: { name, value },
-  // }: {
-  //   target: EventTargetWithValue;
-  //   value: string;
-  // }) =>
-  //   setOrder({
-  //     ...order,
-  //     [name]: value,
-  //   });
 
   const handleSortButtonClick = () => setOrderArguments(order);
 
   // Rendering Functions
   const currentOptions = () => {
     const optionsInUse = numericFilterArguments.map(
-      ({ column }: { column: string }) => column
+      ({ column }: FilterArguments) => column
     );
     const remainingOptions = COLUMN_OPTIONS.filter(
       (option) => !optionsInUse.includes(option)
@@ -140,15 +103,7 @@ export default function FilterForm() {
   const renderCurrentFilters = () => (
     <div>
       {numericFilterArguments.map(
-        ({
-          column,
-          comparison,
-          value,
-        }: {
-          column: string;
-          comparison: string;
-          value: string;
-        }) => (
+        ({ column, comparison, value }: FilterArguments) => (
           <div data-testid="filter" key={column}>
             <span>{`${capitalizeAndAddSpace(column)} ${comparison} ${value}`}</span>
             <button
