@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import deleteProperties from '@/helpers';
+import { deleteProperties } from '@/helpers';
 
 import fetchPlanetsInfo from './fetchPlanets';
 

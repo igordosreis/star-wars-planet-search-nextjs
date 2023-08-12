@@ -1,3 +1,5 @@
+import { capitalizeAndAddSpace } from '@/helpers';
+
 type Props = {
   value: string;
   onChange: React.ChangeEventHandler<HTMLSelectElement>;
@@ -28,9 +30,7 @@ export default function SelectWithOptions({
     >
       {data.map((option: string) => (
         <option key={option} value={option}>
-          {option
-            .replace('_', ' ')
-            .replace(/^./, (char: string) => char.toUpperCase())}
+          {capitalizeAndAddSpace(option)}
         </option>
       ))}
     </select>

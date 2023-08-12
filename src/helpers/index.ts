@@ -15,4 +15,7 @@ const deleteProperties = (arrOfObj: PlanetRaw[], arrOfStr: string[]): Planet[] =
     )
   );
 
-export default deleteProperties;
+const capitalizeAndAddSpace = (word: string) =>
+  word.replace('_', ' ').replace(/^./, (char: string) => char.toUpperCase());
+
+export { deleteProperties, capitalizeAndAddSpace };

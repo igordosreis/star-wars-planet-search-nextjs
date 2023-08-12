@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import useGlobalState from '@/react-query/useGlobalState';
+import { capitalizeAndAddSpace } from '@/helpers';
 
 import SelectWithOptions from './SelectWithOptions';
 
@@ -19,11 +20,11 @@ const COLUMN_OPTIONS = [
   'surface_water',
 ];
 
-const COMPARISON_OPERATOR = ['maior que', 'menor que', 'igual a'];
+const COMPARISON_OPERATOR = ['greater than', 'less than', 'equal to'];
 
 const NUMERIC_FILTERS = {
   column: 'population',
-  comparison: 'maior que',
+  comparison: 'greater than',
   value: 0,
 };
 
@@ -149,7 +150,7 @@ export default function FilterForm() {
           value: string;
         }) => (
           <div data-testid="filter" key={column}>
-            <span>{`${column} ${comparison} ${value}`}</span>
+            <span>{`${capitalizeAndAddSpace(column)} ${comparison} ${value}`}</span>
             <button
               type="button"
               data-filter={column}
@@ -170,7 +171,6 @@ export default function FilterForm() {
       column: options[0],
       value: 0,
     });
-    return () => {};
   }, [numericFilterArguments]);
 
   return (
@@ -210,14 +210,14 @@ export default function FilterForm() {
         type="button"
         onClick={handleAddFilterButtonClick}
       >
-        Filtrar
+        Add filter
       </button>
       <button
         data-testid="button-remove-filters"
         type="button"
         onClick={handleRemoveAllFiltersButtonClick}
       >
-        Remover filtros
+        Remove filters
       </button>
       <SelectWithOptions
         dataTestId="column-sort"
@@ -236,7 +236,7 @@ export default function FilterForm() {
         value="ASC"
         onChange={handleSortSelectAndRadio}
       />
-      Ascendente
+      Ascending
       <input
         data-testid="column-sort-input-desc"
         type="radio"
@@ -246,13 +246,13 @@ export default function FilterForm() {
         value="DSC"
         onChange={handleSortSelectAndRadio}
       />
-      Descendente
+      Descending
       <button
         data-testid="column-sort-button"
         type="button"
         onClick={handleSortButtonClick}
       >
-        Ordenar
+        Order
       </button>
       {renderCurrentFilters()}
     </div>
