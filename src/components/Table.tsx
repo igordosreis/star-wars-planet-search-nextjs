@@ -1,5 +1,3 @@
-import { useContext, useEffect } from 'react';
-
 import usePlanets from '@/services/usePlanets';
 import useGlobalState from '@/react-query/useGlobalState';
 import FilterArguments from '@/interfaces/FilterArguments';
@@ -16,45 +14,42 @@ export default function Table() {
   const { data: planetsInfo } = usePlanets();
 
   // Rendering functions
-  const filterPlanetsByNumericValues = (
-    planetsAcc: Planet[],
-    { column, comparison, value }: FilterArguments
-  ) => {
+  const filterPlanetsByNumericValues = ({
+    column,
+    comparison,
+    value,
+  }: FilterArguments): ((planet: Planet) => boolean) => {
     switch (comparison) {
-      case 'maior que':
-        return (planet: Planet) =>
+      case 'greater than':
+        return (planet: Planet): boolean =>
           Number(planet[column as keyof Planet]) > Number(value);
-      case 'menor que':
-        return (planet: Planet) =>
+      case 'less than':
+        return (planet: Planet): boolean =>
           Number(planet[column as keyof Planet]) < Number(value);
-      case 'igual a':
-        return (planet: Planet) =>
+      case 'equal to':
+        return (planet: Planet): boolean =>
           Number(planet[column as keyof Planet]) === Number(value);
       default:
-        return planetsAcc;
+        throw new Error(`Comparison error: ${comparison}`);
     }
   };
 
-  const filterPlanets = () => {
+  const filterPlanets = (): Planet[] => {
     const planetsFilteredByNumericValues = numericFilterArguments?.reduce(
-      (planetsAcc: any, currentFilter: FilterArguments) =>
-        planetsAcc.filter(filterPlanetsByNumericValues(planetsAcc, currentFilter)),
+      (planetsAcc: Planet[], currentFilter: FilterArguments) =>
+        planetsAcc.filter(filterPlanetsByNumericValues(currentFilter)),
       planetsInfo
     );
 
-    // const planetsFilteredByNumericValuesAndByName =
-    //   planetsFilteredByNumericValues?.filter(({ name }: Planet['name']) =>
-    //     name.toLowerCase().includes(filterByName.toLowerCase())
-    //   );
     const planetsFilteredByNumericValuesAndByName =
-      planetsFilteredByNumericValues?.filter((planet: Planet) =>
-        planet.name.toLowerCase().includes(filterByName.toLowerCase())
+      planetsFilteredByNumericValues?.filter(({ name }: Planet) =>
+        name.toLowerCase().includes(filterByName.toLowerCase())
       );
 
     return planetsFilteredByNumericValuesAndByName;
   };
 
-  const sortPlanets = (filteredPlanets: Planet[]) => {
+  const sortPlanets = (filteredPlanets: Planet[]): Planet[] => {
     const { column, sort } = orderArguments;
 
     const planetsWithUnknownValues = filteredPlanets?.filter(
@@ -90,7 +85,7 @@ export default function Table() {
 
   const filteredAndSortedPlanets: Planet[] = sortPlanets(filterPlanets()) || [];
 
-  const renderTableHeaders = () => (
+  const renderTableHeaders = (): JSX.Element => (
     <thead>
       <tr>
         {Object.keys(filteredAndSortedPlanets[0] || {}).map((header) => (
@@ -104,7 +99,7 @@ export default function Table() {
     </thead>
   );
 
-  const renderTableBody = () => (
+  const renderTableBody = (): JSX.Element => (
     <tbody>
       {filteredAndSortedPlanets.map((planet) => (
         <tr key={planet.name}>

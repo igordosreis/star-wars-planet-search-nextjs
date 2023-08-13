@@ -1,6 +1,9 @@
+import Planet from './Planet';
+import ComparisonType from './Comparision';
+
 interface FilterArguments {
-  column: string;
-  comparison: string;
+  column: keyof Planet;
+  comparison: ComparisonType;
   value: number;
 }
 

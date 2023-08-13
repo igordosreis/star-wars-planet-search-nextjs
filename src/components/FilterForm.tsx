@@ -41,18 +41,21 @@ export default function FilterForm() {
   const [_orderArguments, setOrderArguments] = useGlobalState('orderArguments', {});
 
   // Handling Functions
-  const handleNameFilterInput = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setFilterByName(event.target.value);
+  const handleNameFilterInput = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>): void => setFilterByName(value);
 
-  const handleNumericFilterSelect = (
-    event: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>
-  ) =>
+  const handleNumericFilterSelect = ({
+    target: { name, value },
+  }:
+    | React.ChangeEvent<HTMLSelectElement>
+    | React.ChangeEvent<HTMLInputElement>): void =>
     setFilterByNumericValues({
       ...filterByNumericValues,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
 
-  const handleAddFilterButtonClick = () => {
+  const handleAddFilterButtonClick = (): void => {
     const updatedFilterArguments = [
       ...numericFilterArguments,
       filterByNumericValues,
@@ -60,30 +63,31 @@ export default function FilterForm() {
     setNumericFilterArguments(updatedFilterArguments);
   };
 
-  const handleRemoveFilterButtonClick = (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => {
+  const handleRemoveFilterButtonClick = ({
+    currentTarget,
+  }: React.MouseEvent<HTMLElement, MouseEvent>): void => {
     const updatedFilterArguments = numericFilterArguments.filter(
       ({ column }: FilterArguments) =>
-        column !== event.currentTarget.getAttribute('data-filter')
+        column !== currentTarget.getAttribute('data-filter')
     );
     setNumericFilterArguments(updatedFilterArguments);
   };
 
-  const handleRemoveAllFiltersButtonClick = () => setNumericFilterArguments([]);
+  const handleRemoveAllFiltersButtonClick = (): void =>
+    setNumericFilterArguments([]);
 
-  const handleSortSelectAndRadio = (
-    event: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>
-  ) =>
+  const handleSortSelectAndRadio = ({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) =>
     setOrder({
       ...order,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
 
-  const handleSortButtonClick = () => setOrderArguments(order);
+  const handleSortButtonClick = (): void => setOrderArguments(order);
 
   // Rendering Functions
-  const currentOptions = () => {
+  const availableOptions = (): string[] => {
     const optionsInUse = numericFilterArguments.map(
       ({ column }: FilterArguments) => column
     );
@@ -93,9 +97,9 @@ export default function FilterForm() {
     return remainingOptions;
   };
 
-  const options = currentOptions();
+  const currentOptions = availableOptions();
 
-  const renderCurrentFilters = () => (
+  const renderCurrentFilters = (): JSX.Element => (
     <div>
       {numericFilterArguments.map(
         ({ column, comparison, value }: FilterArguments) => (
@@ -117,8 +121,8 @@ export default function FilterForm() {
   // On props update Functions
   useEffect(() => {
     setFilterByNumericValues({
-      comparison: 'maior que',
-      column: options[0],
+      comparison: 'greater than',
+      column: currentOptions[0],
       value: 0,
     });
   }, [numericFilterArguments]);
@@ -138,7 +142,7 @@ export default function FilterForm() {
         name="column"
         value={filterByNumericValues.column}
         onChange={handleNumericFilterSelect}
-        data={options}
+        data={currentOptions}
       />
       <SelectWithOptions
         dataTestId="comparison-filter"
