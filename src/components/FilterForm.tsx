@@ -2,14 +2,9 @@ import { useEffect } from 'react';
 
 import useGlobalState from '@/react-query/useGlobalState';
 import { capitalizeAndAddSpace } from '@/helpers';
+import FilterArguments from '@/interfaces/FilterArguments';
 
 import SelectWithOptions from './SelectWithOptions';
-
-interface FilterArguments {
-  column: string;
-  comparison?: string;
-  value?: number;
-}
 
 const COLUMN_OPTIONS = [
   'population',
