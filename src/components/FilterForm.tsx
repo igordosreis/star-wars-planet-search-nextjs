@@ -19,7 +19,7 @@ const COMPARISON_OPERATOR = ['greater than', 'less than', 'equal to'];
 const NUMERIC_FILTERS = {
   column: 'population',
   comparison: 'greater than',
-  value: 0,
+  numberValue: '',
 };
 
 const SORT_ORDER = {
@@ -49,11 +49,14 @@ export default function FilterForm() {
     target: { name, value },
   }:
     | React.ChangeEvent<HTMLSelectElement>
-    | React.ChangeEvent<HTMLInputElement>): void =>
+    | React.ChangeEvent<HTMLInputElement>): void => {
+    const valueIsNotANumber = !Number(value);
+    if (name === 'numberValue' && valueIsNotANumber) return;
     setFilterByNumericValues({
       ...filterByNumericValues,
       [name]: value,
     });
+  };
 
   const handleAddFilterButtonClick = (): void => {
     const updatedFilterArguments = [
@@ -102,9 +105,11 @@ export default function FilterForm() {
   const renderCurrentFilters = (): JSX.Element => (
     <div>
       {numericFilterArguments.map(
-        ({ column, comparison, value }: FilterArguments) => (
+        ({ column, comparison, numberValue }: FilterArguments) => (
           <div data-testid="filter" key={column}>
-            <span>{`${capitalizeAndAddSpace(column)} ${comparison} ${value}`}</span>
+            <span>{`${capitalizeAndAddSpace(
+              column
+            )} ${comparison} ${numberValue}`}</span>
             <button
               type="button"
               data-filter={column}
@@ -123,7 +128,7 @@ export default function FilterForm() {
     setFilterByNumericValues({
       comparison: 'greater than',
       column: currentOptions[0],
-      value: 0,
+      numberValue: '',
     });
   }, [numericFilterArguments]);
 
@@ -155,8 +160,8 @@ export default function FilterForm() {
       <input
         data-testid="value-filter"
         type="number"
-        name="value"
-        value={filterByNumericValues.value}
+        name="numberValue"
+        value={filterByNumericValues.numberValue}
         onChange={handleNumericFilterSelect}
       />
       <button

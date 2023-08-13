@@ -17,18 +17,18 @@ export default function Table() {
   const filterPlanetsByNumericValues = ({
     column,
     comparison,
-    value,
+    numberValue,
   }: FilterArguments): ((planet: Planet) => boolean) => {
     switch (comparison) {
       case 'greater than':
         return (planet: Planet): boolean =>
-          Number(planet[column as keyof Planet]) > Number(value);
+          Number(planet[column as keyof Planet]) > Number(numberValue);
       case 'less than':
         return (planet: Planet): boolean =>
-          Number(planet[column as keyof Planet]) < Number(value);
+          Number(planet[column as keyof Planet]) < Number(numberValue);
       case 'equal to':
         return (planet: Planet): boolean =>
-          Number(planet[column as keyof Planet]) === Number(value);
+          Number(planet[column as keyof Planet]) === Number(numberValue);
       default:
         throw new Error(`Comparison error: ${comparison}`);
     }

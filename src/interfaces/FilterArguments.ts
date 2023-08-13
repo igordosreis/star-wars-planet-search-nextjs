@@ -4,7 +4,7 @@ import ComparisonType from './Comparision';
 interface FilterArguments {
   column: keyof Planet;
   comparison: ComparisonType;
-  value: number;
+  numberValue: number;
 }
 
 export default FilterArguments;
