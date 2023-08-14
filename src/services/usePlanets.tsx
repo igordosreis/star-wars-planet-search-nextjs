@@ -19,6 +19,7 @@ const usePlanets = () =>
       return planetsWithRemovedProperties;
     },
     placeholderData: [],
+    refetchOnWindowFocus: false,
   });
 
 export default usePlanets;

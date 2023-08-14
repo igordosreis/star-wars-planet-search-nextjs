@@ -1,3 +1,5 @@
+$ff-epilogue: var(--ff-epilogue);
+
 :root {
   /* --ff-epilogue */
 
@@ -9,8 +11,6 @@
   --fs-600: 1.75rem;
   --fs-900: 2.125rem;
 
-  --fw-200: 200;
-  --fw-300: 300;
   --fw-400: 400;
   --fw-700: 700;
 
@@ -90,12 +90,13 @@ video {
   display: block;
 }
 
-/* button {
+button,
+select {
   background-color: transparent;
   border: none;
   margin: 0;
   padding: 0;
-} */
+}
 
 /* Inherit fonts for inputs and buttons */
 input,
@@ -118,4 +119,13 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.body {
+  font-family: var(--ff-epilogue);
+  font-size: var(--fs-300);
+  font-weight: var(--fw-400);
+
+  background-image: url(/src/assets/millenium-falcon-bg.png);
+  background-position: center center;
 }

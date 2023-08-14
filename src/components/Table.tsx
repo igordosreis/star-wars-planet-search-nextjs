@@ -8,8 +8,6 @@ export default function Table() {
   const [numericFilterArguments] = useGlobalState('numericFilterArguments');
   const [orderArguments] = useGlobalState('orderArguments');
 
-  console.info(numericFilterArguments);
-
   // onMount Functions
   const { data: planetsInfo } = usePlanets();
 
