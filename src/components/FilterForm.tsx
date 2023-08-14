@@ -190,22 +190,22 @@ export default function FilterForm() {
         data-testid="column-sort-input-asc"
         type="radio"
         name="sort"
-        id="sort"
+        id="sort-asc"
         checked={order.sort === 'ASC'}
         value="ASC"
         onChange={handleSortSelectAndRadio}
       />
-      Ascending
+      <label htmlFor="sort-asc">Ascending</label>
       <input
         data-testid="column-sort-input-desc"
         type="radio"
         name="sort"
-        id="sort"
+        id="sort-dsc"
         checked={order.sort === 'DSC'}
         value="DSC"
         onChange={handleSortSelectAndRadio}
       />
-      Descending
+      <label htmlFor="sort-dsc">Descending</label>
       <button
         data-testid="column-sort-button"
         type="button"
