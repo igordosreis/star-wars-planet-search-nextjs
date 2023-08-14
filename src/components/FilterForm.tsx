@@ -133,7 +133,7 @@ export default function FilterForm() {
   }, [numericFilterArguments]);
 
   return (
-    <div>
+    <form>
       <input
         data-testid="name-filter"
         type="text"
@@ -214,6 +214,6 @@ export default function FilterForm() {
         Order
       </button>
       {renderCurrentFilters()}
-    </div>
+    </form>
   );
 }

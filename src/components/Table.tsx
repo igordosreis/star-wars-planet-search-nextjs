@@ -130,12 +130,12 @@ export default function Table() {
                 </td>
               );
             }
-            if (index === 6) {
+            if (index === 6 || index === 5) {
               if (info.includes(',')) {
-                const terrainArray = info.split(',');
+                const wordsArray = info.split(',');
                 return (
                   <td key={info}>
-                    {terrainArray.map((terrain: string) => (
+                    {wordsArray.map((terrain: string) => (
                       <div key={terrain}>{terrain}</div>
                     ))}
                   </td>

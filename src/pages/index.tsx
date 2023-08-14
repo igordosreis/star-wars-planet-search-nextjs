@@ -1,6 +1,5 @@
 import Head from 'next/head';
 
-import ComponentBoilerplate from '@/components/component-boilerplate';
 import Table from '@/components/Table';
 import FilterForm from '@/components/FilterForm';
 
@@ -13,7 +12,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ComponentBoilerplate />
       <FilterForm />
       <Table />
     </>
