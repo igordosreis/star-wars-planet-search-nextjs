@@ -34,7 +34,7 @@ export default function Table() {
     }
   };
 
-  const filterPlanets = (): Planet[] => {
+  const filterPlanets = (): Planet[] | [] => {
     const planetsFilteredByNumericValues = numericFilterArguments?.reduce(
       (planetsAcc: Planet[], currentFilter: FilterArguments) =>
         planetsAcc.filter(filterPlanetsByNumericValues(currentFilter)),
@@ -99,19 +99,61 @@ export default function Table() {
     </thead>
   );
 
+  const movieDecoder = (movieUrl: string): string => {
+    switch (true) {
+      case movieUrl.includes('/films/1/'):
+        return 'Episode 4: A New Hope';
+      case movieUrl.includes('/films/2/'):
+        return 'Episode 5: The Empire Strikes Back';
+      case movieUrl.includes('/films/3/'):
+        return 'Episode 6: Return of the Jedi';
+      case movieUrl.includes('/films/4/'):
+        return 'Episode 1: The Phantom Menace';
+      case movieUrl.includes('/films/5/'):
+        return 'Episode 2: Attack of the Clones';
+      case movieUrl.includes('/films/6/'):
+        return 'Episode 3: Revenge of the Sith';
+      default:
+        return movieUrl;
+    }
+  };
+
   const renderTableBody = (): JSX.Element => (
     <tbody>
       {filteredAndSortedPlanets.map((planet) => (
         <tr key={planet.name}>
-          {Object.values(planet).map((info, index) =>
-            index ? (
-              <td key={info}>{info}</td>
-            ) : (
-              <td data-testid="planet-name" key={info}>
-                {info}
-              </td>
-            )
-          )}
+          {Object.values(planet).map((info, index) => {
+            if (index === 0) {
+              return (
+                <td data-testid="planet-name" key={info}>
+                  {info}
+                </td>
+              );
+            }
+            if (index === 6) {
+              if (info.includes(',')) {
+                const terrainArray = info.split(',');
+                return (
+                  <td key={info}>
+                    {terrainArray.map((terrain: string) => (
+                      <div key={terrain}>{terrain}</div>
+                    ))}
+                  </td>
+                );
+              }
+              return <td key={info}>{info}</td>;
+            }
+            if (index === 9) {
+              return (
+                <td key={info}>
+                  {info.map((movieUrl: string) => (
+                    <div key={movieUrl}>{`${movieDecoder(movieUrl)}`}</div>
+                  ))}
+                </td>
+              );
+            }
+            return <td key={info}>{info}</td>;
+          })}
         </tr>
       ))}
     </tbody>
