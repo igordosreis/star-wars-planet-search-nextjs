@@ -106,18 +106,14 @@ export default function FilterForm() {
     <div>
       {numericFilterArguments.map(
         ({ column, comparison, numberValue }: FilterArguments) => (
-          <div data-testid="filter" key={column}>
-            <span>{`${capitalizeAndAddSpace(
-              column
-            )} ${comparison} ${numberValue}`}</span>
-            <button
-              type="button"
-              data-filter={column}
-              onClick={handleRemoveFilterButtonClick}
-            >
-              X
-            </button>
-          </div>
+          <button
+            key={column}
+            type="button"
+            data-filter={column}
+            onClick={handleRemoveFilterButtonClick}
+          >
+            {`${capitalizeAndAddSpace(column)} ${comparison} ${numberValue}`}
+          </button>
         )
       )}
     </div>
@@ -141,22 +137,28 @@ export default function FilterForm() {
         value={filterByName}
         onChange={handleNameFilterInput}
       />
-      <SelectWithOptions
-        dataTestId="column-filter"
-        id="column"
-        name="column"
-        value={filterByNumericValues.column}
-        onChange={handleNumericFilterSelect}
-        data={currentOptions}
-      />
-      <SelectWithOptions
-        dataTestId="comparison-filter"
-        id="comparison"
-        name="comparison"
-        value={filterByNumericValues.comparison}
-        onChange={handleNumericFilterSelect}
-        data={COMPARISON_OPERATOR}
-      />
+      <div className="column-filter">
+        <label htmlFor="column">Filter by</label>
+        <SelectWithOptions
+          dataTestId="column-filter"
+          id="column"
+          name="column"
+          value={filterByNumericValues.column}
+          onChange={handleNumericFilterSelect}
+          data={currentOptions}
+        />
+      </div>
+      <div className="comparison-filter">
+        <label htmlFor="comparison">Operator</label>
+        <SelectWithOptions
+          dataTestId="comparison-filter"
+          id="comparison"
+          name="comparison"
+          value={filterByNumericValues.comparison}
+          onChange={handleNumericFilterSelect}
+          data={COMPARISON_OPERATOR}
+        />
+      </div>
       <input
         data-testid="value-filter"
         type="number"
@@ -178,34 +180,39 @@ export default function FilterForm() {
       >
         Remove filters
       </button>
-      <SelectWithOptions
-        dataTestId="column-sort"
-        id="column"
-        name="column"
-        value={order.column}
-        onChange={handleSortSelectAndRadio}
-        data={COLUMN_OPTIONS}
-      />
-      <input
-        data-testid="column-sort-input-asc"
-        type="radio"
-        name="sort"
-        id="sort-asc"
-        checked={order.sort === 'ASC'}
-        value="ASC"
-        onChange={handleSortSelectAndRadio}
-      />
-      <label htmlFor="sort-asc">Ascending</label>
-      <input
-        data-testid="column-sort-input-desc"
-        type="radio"
-        name="sort"
-        id="sort-dsc"
-        checked={order.sort === 'DSC'}
-        value="DSC"
-        onChange={handleSortSelectAndRadio}
-      />
-      <label htmlFor="sort-dsc">Descending</label>
+      <div className="column-sort">
+        <div>Sort by</div>
+        <SelectWithOptions
+          dataTestId="column-sort"
+          id="column"
+          name="column"
+          value={order.column}
+          onChange={handleSortSelectAndRadio}
+          data={COLUMN_OPTIONS}
+        />
+      </div>
+      <div className="radio-sort">
+        <input
+          data-testid="column-sort-input-asc"
+          type="radio"
+          name="sort"
+          id="sort-asc"
+          checked={order.sort === 'ASC'}
+          value="ASC"
+          onChange={handleSortSelectAndRadio}
+        />
+        <label htmlFor="sort-asc">Ascending</label>
+        <input
+          data-testid="column-sort-input-desc"
+          type="radio"
+          name="sort"
+          id="sort-dsc"
+          checked={order.sort === 'DSC'}
+          value="DSC"
+          onChange={handleSortSelectAndRadio}
+        />
+        <label htmlFor="sort-dsc">Descending</label>
+      </div>
       <button
         data-testid="column-sort-button"
         type="button"

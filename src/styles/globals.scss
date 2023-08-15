@@ -121,11 +121,42 @@ select {
   }
 }
 
+// typography
+
 .body {
   font-family: var(--ff-epilogue);
   font-size: var(--fs-300);
   font-weight: var(--fw-400);
 
-  background-image: url(/src/assets/millenium-falcon-bg.png);
-  background-position: center center;
+  // background-color: var(--clr-neutral-900);
+  // background-image: url(/src/assets/millenium-falcon-bg.png);
+  // background-position: center center;
+}
+
+// general layout
+
+form,
+table {
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 50rem;
+}
+
+.flow-content > * + * {
+  margin-top: var(--flow-spacer, 1em);
+}
+
+.split {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.split > * {
+  flex-basis: 100%;
 }

@@ -1,6 +1,6 @@
 import '@/styles/globals.scss';
 import type { AppProps } from 'next/app';
-import { Epilogue, Inter } from 'next/font/google';
+import { Epilogue } from 'next/font/google';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -9,12 +9,6 @@ import queryClient from '@/react-query';
 const epilogue = Epilogue({
   subsets: ['latin'],
   variable: '--ff-epilogue',
-  weight: ['400', '700'],
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--ff-inter',
   weight: ['400', '700'],
 });
 
