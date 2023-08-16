@@ -15,8 +15,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StarWars className="sw-logo" />
-      <FilterForm />
-      <Table />
+      <section className="table-form container">
+        <FilterForm />
+        <Table />
+      </section>
     </>
   );
 }

@@ -103,7 +103,14 @@ export default function FilterForm() {
   const currentOptions = availableOptions();
 
   const renderCurrentFilters = (): JSX.Element => (
-    <div>
+    <div className="current-filters">
+      <button
+        data-testid="button-remove-filters"
+        type="button"
+        onClick={handleRemoveAllFiltersButtonClick}
+      >
+        Remove filters
+      </button>
       {numericFilterArguments.map(
         ({ column, comparison, numberValue }: FilterArguments) => (
           <button
@@ -131,6 +138,7 @@ export default function FilterForm() {
   return (
     <form>
       <input
+        className="name-filter"
         data-testid="name-filter"
         type="text"
         name="name"
@@ -160,6 +168,7 @@ export default function FilterForm() {
         />
       </div>
       <input
+        className="numer-filter"
         data-testid="value-filter"
         type="number"
         name="numberValue"
@@ -167,18 +176,12 @@ export default function FilterForm() {
         onChange={handleNumericFilterSelect}
       />
       <button
+        className="apply-filter"
         data-testid="button-filter"
         type="button"
         onClick={handleAddFilterButtonClick}
       >
         Add filter
-      </button>
-      <button
-        data-testid="button-remove-filters"
-        type="button"
-        onClick={handleRemoveAllFiltersButtonClick}
-      >
-        Remove filters
       </button>
       <div className="column-sort">
         <div>Sort by</div>
@@ -214,6 +217,7 @@ export default function FilterForm() {
         <label htmlFor="sort-dsc">Descending</label>
       </div>
       <button
+        className="apply-order"
         data-testid="column-sort-button"
         type="button"
         onClick={handleSortButtonClick}
