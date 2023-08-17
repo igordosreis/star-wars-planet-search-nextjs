@@ -242,47 +242,6 @@ form > * {
   font-size: var(--fs-200);
 }
 
-// form {
-//   display: grid;
-//   grid-template-columns: 1fr;
-//   grid-template-areas:
-//     '. name name name name name .'
-//     'filter-by operator number-filter apply-filter order-by order-radio apply-order'
-//     'current-filters current-filters current-filters . . . .';
-//   gap: 1rem;
-//   padding: 1rem;
-// }
-
-// .name-filter {
-//   grid-area: name;
-// }
-
-// .column-filter {
-//   grid-area: filter-by;
-// }
-// .comparison-filter {
-//   grid-area: operator;
-// }
-// .number-filter {
-//   grid-area: number-filter;
-// }
-// .apply-filter {
-//   grid-area: apply-filter;
-// }
-// .column-sort {
-//   grid-area: order-by;
-// }
-// .radio-sort {
-//   grid-area: order-radio;
-// }
-// .apply-order {
-//   grid-area: apply-order;
-// }
-
-// .current-filters {
-//   grid-area: current-filters;
-// }
-
 /* button styling */
 
 button {
