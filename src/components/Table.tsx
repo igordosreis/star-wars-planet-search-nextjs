@@ -158,9 +158,11 @@ export default function Table() {
   );
 
   return (
-    <table>
-      {renderTableHeaders()}
-      {renderTableBody()}
-    </table>
+    <div className="table-container">
+      <table>
+        {renderTableHeaders()}
+        {renderTableBody()}
+      </table>
+    </div>
   );
 }

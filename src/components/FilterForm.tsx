@@ -104,13 +104,7 @@ export default function FilterForm() {
 
   const renderCurrentFilters = (): JSX.Element => (
     <div className="current-filters">
-      <button
-        data-testid="button-remove-filters"
-        type="button"
-        onClick={handleRemoveAllFiltersButtonClick}
-      >
-        Remove filters
-      </button>
+      <div></div>
       {numericFilterArguments.map(
         ({ column, comparison, numberValue }: FilterArguments) => (
           <button
@@ -136,95 +130,111 @@ export default function FilterForm() {
   }, [numericFilterArguments]);
 
   return (
-    <form>
-      <input
-        className="name-filter"
-        data-testid="name-filter"
-        type="text"
-        name="name"
-        value={filterByName}
-        onChange={handleNameFilterInput}
-      />
-      <div className="column-filter">
-        <label htmlFor="column">Filter by</label>
-        <SelectWithOptions
-          dataTestId="column-filter"
-          id="column"
-          name="column"
-          value={filterByNumericValues.column}
-          onChange={handleNumericFilterSelect}
-          data={currentOptions}
-        />
-      </div>
-      <div className="comparison-filter">
-        <label htmlFor="comparison">Operator</label>
-        <SelectWithOptions
-          dataTestId="comparison-filter"
-          id="comparison"
-          name="comparison"
-          value={filterByNumericValues.comparison}
-          onChange={handleNumericFilterSelect}
-          data={COMPARISON_OPERATOR}
-        />
-      </div>
-      <input
-        className="numer-filter"
-        data-testid="value-filter"
-        type="number"
-        name="numberValue"
-        value={filterByNumericValues.numberValue}
-        onChange={handleNumericFilterSelect}
-      />
-      <button
-        className="apply-filter"
-        data-testid="button-filter"
-        type="button"
-        onClick={handleAddFilterButtonClick}
-      >
-        Add filter
-      </button>
-      <div className="column-sort">
-        <div>Sort by</div>
-        <SelectWithOptions
-          dataTestId="column-sort"
-          id="column"
-          name="column"
-          value={order.column}
-          onChange={handleSortSelectAndRadio}
-          data={COLUMN_OPTIONS}
-        />
-      </div>
-      <div className="radio-sort">
+    <div>
+      <form>
         <input
-          data-testid="column-sort-input-asc"
-          type="radio"
-          name="sort"
-          id="sort-asc"
-          checked={order.sort === 'ASC'}
-          value="ASC"
-          onChange={handleSortSelectAndRadio}
+          className="name-filter"
+          data-testid="name-filter"
+          type="text"
+          name="name"
+          value={filterByName}
+          onChange={handleNameFilterInput}
         />
-        <label htmlFor="sort-asc">Ascending</label>
+        <div className="column-filter">
+          <div className="label">Filter by</div>
+          <SelectWithOptions
+            dataTestId="column-filter"
+            id="column"
+            name="column"
+            value={filterByNumericValues.column}
+            onChange={handleNumericFilterSelect}
+            data={currentOptions}
+          />
+        </div>
+        <div className="comparison-filter">
+          <div className="label">Operator</div>
+          <SelectWithOptions
+            dataTestId="comparison-filter"
+            id="comparison"
+            name="comparison"
+            value={filterByNumericValues.comparison}
+            onChange={handleNumericFilterSelect}
+            data={COMPARISON_OPERATOR}
+          />
+        </div>
         <input
-          data-testid="column-sort-input-desc"
-          type="radio"
-          name="sort"
-          id="sort-dsc"
-          checked={order.sort === 'DSC'}
-          value="DSC"
-          onChange={handleSortSelectAndRadio}
+          className="number-filter"
+          data-testid="value-filter"
+          type="number"
+          name="numberValue"
+          value={filterByNumericValues.numberValue}
+          onChange={handleNumericFilterSelect}
         />
-        <label htmlFor="sort-dsc">Descending</label>
-      </div>
-      <button
-        className="apply-order"
-        data-testid="column-sort-button"
-        type="button"
-        onClick={handleSortButtonClick}
-      >
-        Order
-      </button>
+        <button
+          className="apply-filter btn"
+          data-testid="button-filter"
+          type="button"
+          onClick={handleAddFilterButtonClick}
+          disabled={!currentOptions.length}
+        >
+          Add filter
+        </button>
+        <button
+          className="remove-filters btn"
+          data-testid="button-remove-filters"
+          type="button"
+          onClick={handleRemoveAllFiltersButtonClick}
+          disabled={!(currentOptions.length < COLUMN_OPTIONS.length)}
+        >
+          Remove filters
+        </button>
+        <div className="column-sort btn">
+          <div className="label">Sort by</div>
+          <SelectWithOptions
+            dataTestId="column-sort"
+            id="column"
+            name="column"
+            value={order.column}
+            onChange={handleSortSelectAndRadio}
+            data={COLUMN_OPTIONS}
+          />
+        </div>
+        <div className="radio-sort">
+          <div>
+            <input
+              data-testid="column-sort-input-asc"
+              type="radio"
+              name="sort"
+              id="sort-asc"
+              checked={order.sort === 'ASC'}
+              value="ASC"
+              onChange={handleSortSelectAndRadio}
+            />
+            <label htmlFor="sort-asc">Ascending</label>
+          </div>
+          <div>
+            <input
+              data-testid="column-sort-input-desc"
+              type="radio"
+              name="sort"
+              id="sort-dsc"
+              checked={order.sort === 'DSC'}
+              value="DSC"
+              onChange={handleSortSelectAndRadio}
+            />
+            <label htmlFor="sort-dsc">Descending</label>
+          </div>
+        </div>
+        <button
+          className="apply-order"
+          data-testid="column-sort-button"
+          type="button"
+          onClick={handleSortButtonClick}
+        >
+          Order
+        </button>
+      </form>
       {renderCurrentFilters()}
-    </form>
+    </div>
   );
 }
