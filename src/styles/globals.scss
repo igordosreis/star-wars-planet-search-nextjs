@@ -269,6 +269,10 @@ button:active {
   transition: 50ms ease;
 }
 
+button:disabled:active {
+  background-color: inherit;
+}
+
 button::before {
   --offset: -0.09rem;
 
