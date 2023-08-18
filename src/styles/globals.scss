@@ -209,7 +209,7 @@ form > * {
   width: 10%;
 }
 
-.name-filter {
+.input-wrapper:first-of-type {
   margin: 2.5rem 10rem;
   width: 100%;
   flex-grow: 3;
@@ -233,7 +233,7 @@ form > * {
 }
 
 .current-filters > div {
-  min-height: 3.5rem;
+  min-height: 3.6rem;
 }
 
 .label {
@@ -280,7 +280,7 @@ button::before {
   bottom: var(--offset);
   left: var(--offset);
   border-radius: calc(0.5 * var(--br));
-  box-shadow: 0 0 0.85rem var(--clr-primary-400);
+  box-shadow: 0 0 0.485rem var(--clr-primary-400);
   // box-shadow: 0 0 1.75rem rgb(244, 231, 92);
   transition: opacity 350ms ease;
   opacity: 0;
@@ -327,6 +327,22 @@ input {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: textfield;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-label {
+  position: absolute;
+  top: -0.5rem;
+  z-index: 1;
+  left: 0.6rem;
+  background-color: var(--clr-neutral-900);
+  padding: 0 5px;
+  font-size: var(--fs-200);
+  color: var(--clr-neutral-300);
+  font-size: var(--fs-200);
 }
 
 /* radio styling */

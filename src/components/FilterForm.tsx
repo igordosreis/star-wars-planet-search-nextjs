@@ -132,14 +132,17 @@ export default function FilterForm() {
   return (
     <div>
       <form>
-        <input
-          className="name-filter"
-          data-testid="name-filter"
-          type="text"
-          name="name"
-          value={filterByName}
-          onChange={handleNameFilterInput}
-        />
+        <div className="input-wrapper">
+          <span className="input-label">Enter a name</span>
+          <input
+            className="name-filter"
+            data-testid="name-filter"
+            type="text"
+            name="name"
+            value={filterByName}
+            onChange={handleNameFilterInput}
+          />
+        </div>
         <div className="column-filter">
           <div className="label">Filter by</div>
           <SelectWithOptions
@@ -162,14 +165,17 @@ export default function FilterForm() {
             data={COMPARISON_OPERATOR}
           />
         </div>
-        <input
-          className="number-filter"
-          data-testid="value-filter"
-          type="number"
-          name="numberValue"
-          value={filterByNumericValues.numberValue}
-          onChange={handleNumericFilterSelect}
-        />
+        <div className="input-wrapper">
+          <span className="input-label">Enter a number</span>
+          <input
+            className="number-filter"
+            data-testid="value-filter"
+            type="number"
+            name="numberValue"
+            value={filterByNumericValues.numberValue}
+            onChange={handleNumericFilterSelect}
+          />
+        </div>
         <button
           className="apply-filter btn"
           data-testid="button-filter"
