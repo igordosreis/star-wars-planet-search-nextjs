@@ -1,6 +1,6 @@
 import { capitalizeAndAddSpace } from '@/helpers';
 
-type Props = {
+interface Props = {
   value: string;
   onChange: React.ChangeEventHandler<HTMLSelectElement>;
   data: string[];
